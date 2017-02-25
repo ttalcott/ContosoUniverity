@@ -33,7 +33,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseId,Credits,Title")] Course course)
+        public async Task<IActionResult> Create([Bind("CourseID,Credits,Title")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CourseId,Credits,Title")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("CourseID,Credits,Title")] Course course)
         {
-            if (id != course.CourseId)
+            if (id != course.CourseID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace ContosoUniversity.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.CourseId))
+                    if (!CourseExists(course.CourseID))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -145,7 +145,7 @@ namespace ContosoUniversity.Controllers
 
         private bool CourseExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseId == id);
+            return _context.Courses.Any(e => e.CourseID == id);
         }
     }
 }

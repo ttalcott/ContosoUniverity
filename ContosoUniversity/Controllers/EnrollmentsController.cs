@@ -34,7 +34,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentId == id);
+            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentID == id);
             if (enrollment == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EnrollmentId,CourseId,Grade,StudentId")] Enrollment enrollment)
+        public async Task<IActionResult> Create([Bind("EnrollmentID,CourseId,Grade,StudentId")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -64,8 +64,8 @@ namespace ContosoUniversity.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", enrollment.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", enrollment.CourseID);
+            ViewData["StudentId"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentID);
             return View(enrollment);
         }
 
@@ -77,13 +77,13 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentId == id);
+            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentID == id);
             if (enrollment == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", enrollment.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentId);
+            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", enrollment.CourseID);
+            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentID);
             return View(enrollment);
         }
 
@@ -92,9 +92,9 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentId,CourseId,Grade,StudentId")] Enrollment enrollment)
+        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentID,CourseId,Grade,StudentId")] Enrollment enrollment)
         {
-            if (id != enrollment.EnrollmentId)
+            if (id != enrollment.EnrollmentID)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace ContosoUniversity.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EnrollmentExists(enrollment.EnrollmentId))
+                    if (!EnrollmentExists(enrollment.EnrollmentID))
                     {
                         return NotFound();
                     }
@@ -119,8 +119,8 @@ namespace ContosoUniversity.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", enrollment.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", enrollment.CourseID);
+            ViewData["StudentId"] = new SelectList(_context.Students, "ID", "ID", enrollment.StudentID);
             return View(enrollment);
         }
 
@@ -132,7 +132,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentId == id);
+            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentID == id);
             if (enrollment == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentId == id);
+            var enrollment = await _context.Enrollments.SingleOrDefaultAsync(m => m.EnrollmentID == id);
             _context.Enrollments.Remove(enrollment);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -154,7 +154,7 @@ namespace ContosoUniversity.Controllers
 
         private bool EnrollmentExists(int id)
         {
-            return _context.Enrollments.Any(e => e.EnrollmentId == id);
+            return _context.Enrollments.Any(e => e.EnrollmentID == id);
         }
     }
 }
