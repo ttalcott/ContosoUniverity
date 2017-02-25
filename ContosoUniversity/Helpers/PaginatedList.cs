@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Helpers
 {
-    public class PaginatedList<T> : List<T>
+    public class PaginatedList<T>: List<T>
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
@@ -16,7 +16,6 @@ namespace ContosoUniversity.Helpers
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
             this.AddRange(items);
-
         }
 
         private bool hasPreviousPage;
@@ -24,16 +23,15 @@ namespace ContosoUniversity.Helpers
         public bool HasPreviousPage
         {
             get { return PageIndex > 1; }
-
         }
-        public bool hasNextPage;
+        private bool hasNextPage;
 
         public bool HasNextPage
         {
-            get { return PageIndex < TotalPages; }
-
+            get { return PageIndex< TotalPages ; }
         }
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+
+        public static async Task<PaginatedList<T>> CreateAsync (IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();

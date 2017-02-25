@@ -1,12 +1,11 @@
 ﻿{
-  "userSecretsId": "aspnet-ContosoUniversity-c6dfdef8-2bb7-4a66-a11a-cbe6811eb09d",
+  "userSecretsId": "aspnet-ContosoUniversity-1a49a3a3-718e-46c7-9cf8-660b4dde2438",
 
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
       "type": "platform"
     },
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -41,7 +40,7 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc":  {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
     }
