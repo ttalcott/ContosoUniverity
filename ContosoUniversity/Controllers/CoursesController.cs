@@ -22,6 +22,9 @@ namespace ContosoUniversity.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
+            var courses = _context.Courses
+                    .Include(d => d.Department)
+                    .AsNoTracking();
             return View(await _context.Courses.ToListAsync());
         }
 
