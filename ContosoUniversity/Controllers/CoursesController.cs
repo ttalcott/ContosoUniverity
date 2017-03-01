@@ -25,7 +25,7 @@ namespace ContosoUniversity.Controllers
             var courses = _context.Courses
                     .Include(d => d.Department)
                     .AsNoTracking();
-            return View(await _context.Courses.ToListAsync());
+            return View(await courses.ToListAsync());
         }
 
         // GET: Courses/Details/5
