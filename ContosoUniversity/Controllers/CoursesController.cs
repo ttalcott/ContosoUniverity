@@ -55,6 +55,7 @@ namespace ContosoUniversity.Controllers
             return View();
         }
 
+
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -87,7 +88,7 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
-            PopulateDepartmentsDropdownList(course.DepartmentID);
+            PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
 
@@ -135,6 +136,26 @@ namespace ContosoUniversity.Controllers
             ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
         }
 
+        
+        public IActionResult UpdateCourseCredits()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewData["RowsAffected"] =
+                    await _context.Database.ExecuteSqlCommandAsync(
+                        "UPDATE Course SET Credits = Credits * {0}",
+                        parameters: multiplier);
+            }
+            return View();
+        }
+
+
         // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -143,7 +164,10 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
+            var course = await _context.Courses
+                .Include(c => c.Department)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {
                 return NotFound();

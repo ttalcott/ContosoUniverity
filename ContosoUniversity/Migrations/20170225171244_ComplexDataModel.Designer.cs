@@ -99,7 +99,7 @@ namespace ContosoUniversity.Migrations
 
                     b.Property<int?>("CourseID");
 
-                    b.Property<string>("FirstMidName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnName("FirstName")
                         .HasAnnotation("MaxLength", 50);
