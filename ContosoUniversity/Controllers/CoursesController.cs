@@ -10,6 +10,7 @@ using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {
+    
     public class CoursesController : Controller
     {
         private readonly SchoolContext _context;
